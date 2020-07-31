@@ -1,0 +1,21 @@
+ko,effect_size,status,name,brite
+K20492,4.00515533234752,stay,lantibiotic transport system permease protein,Environmental Information Processing
+K20491,3.9369638040272,stay,lantibiotic transport system permease protein,Environmental Information Processing
+K19545,3.59392524506724,stay,lincosamide nucleotidyltransferase A/C/D/E,Antimicrobial resistance genes
+K18220,3.5864794328419,stay,ribosomal protection tetracycline resistance protein,Antimicrobial resistance genes
+K18214,3.44146276261485,stay,"MFS transporter, DHA3 family, tetracycline resistance protein",Antimicrobial resistance genes
+K06132,3.35834432389415,stay,cardiolipin synthase C [EC:2.7.8.-],Metabolism
+K20490,3.31416011597789,stay,lantibiotic transport system ATP-binding protein,Environmental Information Processing
+K00561,3.11629129197276,stay,rRNA (adenine-N6-)-methyltransferase,Antimicrobial resistance genes
+K20487,2.88743711259044,stay,"two-component system, OmpR family, lantibiotic biosynthesis sensor histidine kinase NisK/SpaK [EC:2.7.13.3]",Environmental Information Processing
+K20488,2.87396670128978,stay,"two-component system, OmpR family, lantibiotic biosynthesis response regulator NisR/SpaR",Environmental Information Processing
+K03709,-3.51977037642324,gone,"DtxR family transcriptional regulator, Mn-dependent transcriptional",Transcription factors
+K03736,-3.54287099097096,gone,ethanolamine ammonia-lyase small subunit [EC:4.3.1.7],Metabolism
+K03735,-3.72420191023671,gone,ethanolamine ammonia-lyase large subunit [EC:4.3.1.7],Metabolism
+K00364,-3.73317407820546,gone,GMP reductase [EC:1.7.1.7],Metabolism
+K05781,-4.0458538458141,gone,putative phosphonate transport system ATP-binding protein,Unclassified: signaling and cellular processes
+K08298,-4.11247848723256,gone,crotonobetainyl-CoA:carnitine CoA-transferase,Unclassified: metabolism
+K11179,-4.36451124403798,gone,tRNA 2-thiouridine synthesizing protein E [EC:2.8.1.-],Genetic Information Processing
+K04045,-4.56726645682179,gone,molecular chaperone HscC,Genetic Information Processing
+K07305,-4.58022426817739,gone,peptide-methionine (R)-S-oxide reductase,Unclassified: metabolism
+K14682,-4.91510247443044,gone,amino-acid N-acetyltransferase [EC:2.3.1.1],Metabolism

@@ -1,0 +1,21 @@
+ko,effect_size,status,name,brite
+K20492,4.98079194571201,settle,lantibiotic transport system permease protein,Environmental Information Processing
+K20491,4.51697101141636,settle,lantibiotic transport system permease protein,Environmental Information Processing
+K18220,4.25648774649326,settle,ribosomal protection tetracycline resistance protein,Antimicrobial resistance genes
+K06132,4.25499476935093,settle,cardiolipin synthase C [EC:2.7.8.-],Metabolism
+K08744,3.80972089316074,settle,cardiolipin synthase (CMP-forming) [EC:2.7.8.41],Metabolism
+K20490,3.58102216269199,settle,lantibiotic transport system ATP-binding protein,Environmental Information Processing
+K02439,3.54406823660557,settle,thiosulfate sulfurtransferase [EC:2.8.1.1],Metabolism
+K20488,3.43089665915195,settle,"two-component system, OmpR family, lantibiotic biosynthesis response regulator NisR/SpaR",Environmental Information Processing
+K20487,3.38577641989414,settle,"two-component system, OmpR family, lantibiotic biosynthesis sensor histidine kinase NisK/SpaK [EC:2.7.13.3]",Environmental Information Processing
+K18214,3.01407422568027,settle,"MFS transporter, DHA3 family, tetracycline resistance protein",Antimicrobial resistance genes
+K11617,-5.26658878777798,not settle,"two-component system, NarL family, sensor histidine kinase LiaS [EC:2.7.13.3]",Environmental Information Processing
+K05362,-5.27602777932461,not settle,UDP-N-acetylmuramoyl-L-alanyl-D-glutamate-L-lysine ligase [EC:6.3.2.7],Metabolism
+K17758,-5.33811769936856,not settle,ADP-dependent NAD(P)H-hydrate dehydratase [EC:4.2.1.136],Unclassified: metabolism
+K03475,-5.3397623107272,not settle,"PTS system, ascorbate-specific IIC component",Metabolism
+K00867,-5.3421603247958,not settle,type I pantothenate kinase [EC:2.7.1.33],Metabolism
+K16868,-5.34920511697109,not settle,tellurite methyltransferase [EC:2.1.1.265],Unclassified: metabolism
+K14982,-5.39238892052944,not settle,"two-component system, OmpR family, sensor histidine kinase CiaH [EC:2.7.13.3]",Environmental Information Processing
+K07146,-5.40229139779385,not settle,UPF0176 protein,Unclassified
+K06929,-5.50105724786099,not settle,uncharacterized protein,Unclassified
+K00841,-5.55141554330166,not settle,aminotransferase [EC:2.6.1.-],Metabolism
