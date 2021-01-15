@@ -1,4 +1,18 @@
+###################################################################################
+# This R code designed to made Figure 3B "Density plot describes microbial reads  #
+# distributions in settle-not settle and stay-gone “baskets” categories."         #
+# of Olekhnovich et al. (2020) manuscript                                         #
+#                                                                                 #
+# "Separation of donor and recipient microbial diversity                          #
+# allow to determine taxonomic and functional features of                         #
+# microbiota restructuring following fecal transplantation"                       #
+#                                                                                 #
+## E I. Olekhnovich, January 14, 2021                                             #
+#                                                                                 #
+###################################################################################
+
 workdir <- "/home/acari/github/RECAST_project/"
+setwd(workdir)
 
 library(ggplot2)
 library(tidyr)
@@ -6,8 +20,6 @@ library(stringr)
 library(gridExtra)
 library(reshape2)
 library(pheatmap)
-
-setwd(workdir)
 
 # import data tables
 df_sorting <- read.csv("DATA/df_reads_count_benchmark_sorting.org", sep = "\t", stringsAsFactors = F)

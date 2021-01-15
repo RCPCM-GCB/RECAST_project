@@ -11,9 +11,11 @@
 #                                                                                 #
 ###################################################################################
 
+# Set work directory 
 workdir <- "/home/acari/github/RECAST_project/"
 setwd(workdir)
 
+# Set libraries
 library(ggplot2)
 library(tidyr)
 library(stringr)
@@ -21,14 +23,18 @@ library(gridExtra)
 library(reshape2)
 library(pheatmap)
 
-# import data tables
+# Import tables
+## Sorting
 df_sorting <- read.csv("DATA/df_reads_count_sorting.org", sep = "\t", stringsAsFactors = F)
+## Non-sorting
 df_non_sorting <- read.csv("DATA/df_reads_count_non_sorting.org", sep = "\t", stringsAsFactors = F)
 
+## Sample metadata
 sample.metadata <- read.csv("DATA/sample.metadata", sep = "\t", stringsAsFactors = F)
 sample.metadata.sbs <- sample.metadata[c(1:4,6:7)]
 sample.metadata.sbs <- sample.metadata.sbs[sample.metadata.sbs$Status == "Allogenic",]
 
+# Extract baseline IDs
 base.meta <- NULL
 for (subject in unique(sample.metadata.sbs$Subject)){
     
@@ -42,10 +48,9 @@ for (subject in unique(sample.metadata.sbs$Subject)){
         ), 
         base.meta
     )
-    
 }
 
-# add groups to sorting data frame 
+# Add groups to sorting data frame 
 groups <- sapply(str_split(df_sorting$sample, "\\_", n = 3), function(x) x[3])
 pattern <- paste0(paste0("_", unique(groups)), collapse = "|")
 non_sorting_sample_id <- gsub(pattern, "", df_sorting$sample)
@@ -57,12 +62,11 @@ group.df$group[group.df$group == "n"] <- "not_settle"
 group.df$group <- gsub("came_", "", group.df$group)
 
 df_sort_gr <- cbind(df_sorting, group.df)
-colnames(df_sort_gr)
 
-# make baseline reads count data frame 
+# Make baseline reads count data frame 
 df_baseline <- merge(base.meta, df_non_sorting[c(3,1,2)], by = 1)[-1]
 
-# make donor reads count data frame
+# Make donor reads count data frame
 df_donor <- sample.metadata.sbs[sample.metadata.sbs$Time !=0,][c(1,5)]
 df_donor$Donor[df_donor$Donor == "FAT_DON_11"] <- "FAT_DON_11-22-pooled"
 df_donor$Donor[df_donor$Donor == "FAT_DON_19"] <- "FAT_DON_19-22-0-0"
@@ -70,7 +74,7 @@ df_donor$Donor[df_donor$Donor == "FAT_DON_8"] <- "FAT_DON_8-22-0-0"
 df_donor <- merge(df_donor[c(2,1)], df_non_sorting[c(3,1,2)], by = 1)
 df_donor <- df_donor[-1]
 
-# merge 
+# Merge Merge Merge
 df_sort_gr_2 <- df_sort_gr[c(4,5,1,2)]
 
 colnames(df_sort_gr_2)[1] <- "Sample"
@@ -99,6 +103,7 @@ df_sort_baseline_sg_group.spread$stay <- df_sort_baseline_sg_group.spread$stay+1
 df_sort_baseline_sg_group.spread$index <- df_sort_baseline_sg_group.spread$stay/(df_sort_baseline_sg_group.spread$stay+
                                                                                      df_sort_baseline_sg_group.spread$gone)
 
+# Make density plot
 density_plot <- ggplot()+
     geom_density(df_sort_donor_sns_group.spread, mapping = aes(index), col = "white", fill = 'red', alpha = 0.35)+
     geom_density(df_sort_baseline_sg_group.spread, mapping = aes(index), col = "white", fill = 'blue', alpha = 0.35)+
@@ -107,6 +112,7 @@ density_plot <- ggplot()+
     ggtitle("FMT")+
     ylim(c(0,10))
 
+# Save density plot
 svg(filename="FIGURES/density_plot.svg", width=3.5, height=2.5, pointsize=12)
 density_plot
 dev.off()
