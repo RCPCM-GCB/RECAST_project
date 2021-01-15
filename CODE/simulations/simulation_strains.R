@@ -1,11 +1,27 @@
+###################################################################################
+# This R code designed to made Figure 2C "The results of the second step of the   #
+# RECAST algorithm testing using the simulation datasets (species)" of            #
+# Olekhnovich et al. (2020) manuscript                                            #
+#                                                                                 #                     
+# "Separation of donor and recipient microbial diversity                          #
+# allow to determine taxonomic and functional features of                         #
+# microbiota restructuring following fecal transplantation"                       #
+#                                                                                 #
+## E I. Olekhnovich, January 14, 2021                                             #
+#                                                                                 #
+###################################################################################
+
+# Set work directory 
 workdir <- "/home/acari/github/RECAST_project/"
 setwd(workdir)
 
+# Set libraries
 library(ggplot2)
 library(Metrics)
 library(stringr)
 library(reshape2)
 
+# Make the function for calculate main classification quality metrics
 metrics_calc <- function(df){
     y <- as.numeric(unlist(df.sbs["class"]))
     predictions <- as.numeric(unlist(df.sbs["scored.class"]))
@@ -16,15 +32,16 @@ metrics_calc <- function(df){
     return(DF)
 }
 
+# Import data
 df.idxstats.all <- read.csv("DATA/simulation_strains.txt", sep = "\t")
 
+# Processing data
 df.idxstats.all$coverage[is.na(df.idxstats.all$coverage)] <- 0
 df.idxstats.all$mapped[is.na(df.idxstats.all$mapped)] <- 0
 df.idxstats.all$coverage[df.idxstats.all$coverage > 0] <- 1
 df.idxstats.all$mapped[df.idxstats.all$mapped > 0] <- 1
 
 colnames(df.idxstats.all)[c(4,5)] <- c('scored.class', 'class')
-
 df.idxstats.all$sample <- as.character(df.idxstats.all$sample)
 
 df.f1.from_donor <- NULL
@@ -52,6 +69,7 @@ df.f1.from_donor.sbs <- df.f1.from_donor.sbs[df.f1.from_donor.sbs$group != "came
 
 df.f1.from_donor.sbs$group <- factor(df.f1.from_donor.sbs$group, levels = c("came_from_donor", "came_from_before"))
 
+# Make the strains classification quality plot
 from_donor.metrics <- ggplot(df.f1.from_donor.sbs, aes(nreads, value, col = complexity))+
     geom_point()+
     facet_wrap(~group, ncol = 1)+
@@ -64,6 +82,7 @@ from_donor.metrics <- ggplot(df.f1.from_donor.sbs, aes(nreads, value, col = comp
     xlab("# reads")+
     scale_color_brewer(palette = "Set1")
 
+# Save plot
 svg(filename="f1_metrics_strains.svg", width=4.0, height=5.0)
 from_donor.metrics
 dev.off()

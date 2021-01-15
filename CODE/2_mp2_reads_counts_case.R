@@ -112,7 +112,7 @@ density_plot <- ggplot()+
     ggtitle("FMT")+
     ylim(c(0,10))
 
-# Save density plot
+# Save plot
 svg(filename="FIGURES/density_plot.svg", width=3.5, height=2.5, pointsize=12)
 density_plot
 dev.off()
