@@ -70,6 +70,6 @@ bray_biplot <- ggplot(bray.mds.points, aes(MDS1, MDS2, col = group))+
     scale_color_brewer(palette="Set1")
 
 # Save biplot
-svg(filename="FIGURES/biplot_humann2_sorting.svg", width=4.5, height=3.3, pointsize=12)
+svg(filename="FIGURES/biplot_humann2.svg", width=4.5, height=3.3, pointsize=12)
 bray_biplot
 dev.off()

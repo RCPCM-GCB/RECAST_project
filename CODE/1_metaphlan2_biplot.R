@@ -113,7 +113,7 @@ bray_biplot <- ggplot(bray.mds.points, aes(MDS1, MDS2, col = group, shape = data
     scale_color_brewer(palette = "Set1")+
     theme_bw()+
     theme(legend.position = "right")+
-    scale_shape_manual(values = c(15, 1))
+    scale_shape_manual(values = c(19, 0))
 
 # Save Bray-Curtis MDS biplot
 svg(filename="FIGURES/biplot_mp2.svg", width=4.5, height=3.3, pointsize=12)

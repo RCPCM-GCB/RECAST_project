@@ -108,18 +108,18 @@ bray.mds.points <- bray.mds.points[-1]
 
 bray.mds.points$group <- factor(bray.mds.points$group, levels = c("settle", "not_settle", "stay", "gone"))
 
-bray_biplot <- ggplot(bray.mds.points, aes(MDS1, MDS2, col = group, shape = dataset))+
-    geom_point(size = 2)+
-    # xlim(c(-0.5,0.5))+
-    # ylim(c(-0.5,0.5))+
-    scale_color_brewer(palette = "Set1")+
-    theme_bw()+
-    theme(legend.position = "right")+
-    scale_shape_manual(values = c(19,0))
-
-svg(filename="FIGURES/biplot_lantibiotics.svg", width=4.5, height=3.3, pointsize=12)
-bray_biplot
-dev.off()
+# bray_biplot <- ggplot(bray.mds.points, aes(MDS1, MDS2, col = group, shape = dataset))+
+#     geom_point(size = 2)+
+#     # xlim(c(-0.5,0.5))+
+#     # ylim(c(-0.5,0.5))+
+#     scale_color_brewer(palette = "Set1")+
+#     theme_bw()+
+#     theme(legend.position = "right")+
+#     scale_shape_manual(values = c(19,0))
+# 
+# svg(filename="FIGURES/biplot_lantibiotics.svg", width=4.5, height=3.3, pointsize=12)
+# bray_biplot
+# dev.off()
 
 # add to combine table group data
 df.sort.group <- merge(group.df, df.sort.all, by = 1)[-1]
@@ -132,21 +132,21 @@ df.sort.sum <- as.data.frame(df.sort.sum)
 
 df.sort.sum$group <- factor(df.sort.sum$group, levels = c("settle", "not_settle", "stay", "gone"))
 
-lanti_barplot <- ggplot(df.sort.sum, aes(group, mean, fill = group))+
-    geom_bar(color="black", position = position_dodge(), stat = "identity", width = 0.55)+
-    geom_errorbar(aes(ymin = mean, ymax = mean+sd), width=.2,
-                  position=position_dodge(.9))+
-    facet_wrap(~dataset)+
-    theme_classic()+
-    scale_fill_brewer(palette = "Set1")+
-    theme(legend.position = "bottom")+
-    ylim(c(0,12000))+
-    ylab("Hits")+
-    xlab("Groups")
-
-svg(filename="FIGURES/barplot_lantibiotics.svg", width=4.5, height=3.3, pointsize=12)
-lanti_barplot
-dev.off()
+# lanti_barplot <- ggplot(df.sort.sum, aes(group, mean, fill = group))+
+#     geom_bar(color="black", position = position_dodge(), stat = "identity", width = 0.55)+
+#     geom_errorbar(aes(ymin = mean, ymax = mean+sd), width=.2,
+#                   position=position_dodge(.9))+
+#     facet_wrap(~dataset)+
+#     theme_classic()+
+#     scale_fill_brewer(palette = "Set1")+
+#     theme(legend.position = "bottom")+
+#     ylim(c(0,12000))+
+#     ylab("Hits")+
+#     xlab("Groups")
+# 
+# svg(filename="FIGURES/barplot_lantibiotics.svg", width=4.5, height=3.3, pointsize=12)
+# lanti_barplot
+# dev.off()
 
 ############################
 df.line_2 <- merge(group.df, df.sort.all, by = 1)[-1]
@@ -187,7 +187,7 @@ lineplot_lanti_line_2 <- ggplot(df.line_2_4.sbs, aes(Time, relab, group = group,
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_lantibiotics.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_lantibiotics.svg", width=6, height=1.5, pointsize=12)
 lineplot_lanti_line_2
 dev.off()
 
@@ -229,7 +229,7 @@ lineplot_lanti_line_3 <- ggplot(df.line_3_4.sbs, aes(Time, relab, group = group,
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_lantibiotics_sns.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_lantibiotics_sns.svg", width=6, height=1.5, pointsize=12)
 lineplot_lanti_line_3
 dev.off()
 
@@ -271,6 +271,6 @@ lineplot_lanti_line_4 <- ggplot(df.line_4_4.sbs, aes(Time, relab, group = group,
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_lantibiotics_sg.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_lantibiotics_sg.svg", width=6, height=1.5, pointsize=12)
 lineplot_lanti_line_4
 dev.off()

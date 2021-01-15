@@ -12,7 +12,7 @@
 ###################################################################################
 
 # Set work directory 
-workdir <- "/home/acari/github/FMT_project/"
+workdir <- "/home/acari/github/RECAST_project/"
 setwd(workdir)
 
 # Set libraries
@@ -25,7 +25,7 @@ library(gridExtra)
 
 # Import tables
 ## Metadata table
-sample.metadata <- read.csv("DATA/sample.metadata.txt", sep = "\t", stringsAsFactors = F)
+sample.metadata <- read.csv("DATA/sample.metadata", sep = "\t", stringsAsFactors = F)
 sample.metadata.sbs <- sample.metadata[c(1:3,7)]
 ## Case
 ### Sorting
@@ -139,14 +139,14 @@ VOIGT15_plot <- ggplot(df_dp_2.sbs[df_dp_2.sbs$Dataset %in% c("VOIGT15"),], aes(
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
 # Save plots
-svg(filename="FIGURES/SPB18_LEE17_plot.svg", width=8, height=2, pointsize=12)
+svg(filename="FIGURES/SPB18_LEE17_area_plot.svg", width=8, height=2, pointsize=12)
 SPB18_LEE17_plot
 dev.off()
 
-svg(filename="FIGURES/VRIEZE12_plot.svg", width=8, height=2, pointsize=12)
+svg(filename="FIGURES/VRIEZE12_area_plot.svg", width=8, height=2, pointsize=12)
 VRIEZE12_plot
 dev.off()
 
-svg(filename="FIGURES/VOIGT15_plot.svg", width=8, height=2, pointsize=12)
+svg(filename="FIGURES/VOIGT15_area_plot.svg", width=8, height=2, pointsize=12)
 VOIGT15_plot
 dev.off()

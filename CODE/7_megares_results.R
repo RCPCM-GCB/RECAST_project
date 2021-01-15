@@ -102,18 +102,18 @@ bray.mds.points <- bray.mds.points[-1]
 
 bray.mds.points$group <- factor(bray.mds.points$group, levels = c("settle", "not_settle", "stay", "gone"))
 
-bray_biplot <- ggplot(bray.mds.points, aes(MDS1, MDS2, col = group, shape = dataset))+
-    geom_point(size = 2)+
-    # xlim(c(-1.5,1.5))+
-    # ylim(c(-1.5,1.5))+
-    scale_color_brewer(palette = "Set1")+
-    theme_bw()+
-    theme(legend.position = "right")+
-    scale_shape_manual(values = c(19,0))
-
-svg(filename="FIGURES/biplot_megares.svg", width=4.5, height=3.3, pointsize=12)
-bray_biplot
-dev.off()
+# bray_biplot <- ggplot(bray.mds.points, aes(MDS1, MDS2, col = group, shape = dataset))+
+#     geom_point(size = 2)+
+#     # xlim(c(-1.5,1.5))+
+#     # ylim(c(-1.5,1.5))+
+#     scale_color_brewer(palette = "Set1")+
+#     theme_bw()+
+#     theme(legend.position = "right")+
+#     scale_shape_manual(values = c(19,0))
+# 
+# svg(filename="FIGURES/biplot_megares.svg", width=4.5, height=3.3, pointsize=12)
+# bray_biplot
+# dev.off()
 
 df.sort.no_zeros.sbs_2 <- cbind(group.df[group.df$Sample %in% rownames(df.sort.no_zeros.sbs),][-1], df.sort.no_zeros.sbs)
 
@@ -134,39 +134,39 @@ df.sort.melt_2 <- df.sort.melt %>%
                     summarise(mean = mean(Hits), sd = sd(Hits))
 df.sort.melt_2 <- as.data.frame(df.sort.melt_2)
 
-megares_barplot <- ggplot(df.sort.melt_2, aes(group, mean, fill = group))+
-    geom_bar(color="black", position = position_dodge(), stat = "identity", width = 0.55)+
-    geom_errorbar(aes(ymin = mean, ymax = mean+sd), width=.2,
-                      position=position_dodge(.9))+
-    facet_wrap(~dataset, ncol = 2)+
-    theme_classic()+
-    scale_fill_brewer(palette = "Set1")+
-    theme(legend.position = "bottom")+
-    xlab("Groups")+
-    ylab("Hits")+
-    ylim(c(0,20000))
-
-svg(filename="FIGURES/barplot_megares.svg", width=4.5, height=3.3, pointsize=12)
-megares_barplot
-dev.off()
+# megares_barplot <- ggplot(df.sort.melt_2, aes(group, mean, fill = group))+
+#     geom_bar(color="black", position = position_dodge(), stat = "identity", width = 0.55)+
+#     geom_errorbar(aes(ymin = mean, ymax = mean+sd), width=.2,
+#                       position=position_dodge(.9))+
+#     facet_wrap(~dataset, ncol = 2)+
+#     theme_classic()+
+#     scale_fill_brewer(palette = "Set1")+
+#     theme(legend.position = "bottom")+
+#     xlab("Groups")+
+#     ylab("Hits")+
+#     ylim(c(0,20000))
+# 
+# svg(filename="FIGURES/barplot_megares.svg", width=4.5, height=3.3, pointsize=12)
+# megares_barplot
+# dev.off()
 
 df.sort.melt_3 <- df.sort.melt %>% 
     group_by(group, dataset, ARGs_group) %>% 
     summarise(mean = mean(Hits), sd = sd(Hits))
 df.sort.melt_3 <- as.data.frame(df.sort.melt_3)
 
-megares_barplot_2 <- ggplot(df.sort.melt_3, aes(ARGs_group, mean, fill = group))+
-    geom_bar(color="black", position = position_dodge(), stat = "identity", width = 0.75)+
-    facet_wrap(~dataset, ncol = 1)+
-    theme_classic()+
-    scale_fill_brewer(palette = "Set1")+
-    theme(legend.position = "bottom")+
-    xlab("Groups of ARGs")+
-    ylab("Mean of hits")
-
-svg(filename="FIGURES/barplot_megares_by_groups.svg", width=6.5, height=4.5, pointsize=12)
-megares_barplot_2
-dev.off()
+# megares_barplot_2 <- ggplot(df.sort.melt_3, aes(ARGs_group, mean, fill = group))+
+#     geom_bar(color="black", position = position_dodge(), stat = "identity", width = 0.75)+
+#     facet_wrap(~dataset, ncol = 1)+
+#     theme_classic()+
+#     scale_fill_brewer(palette = "Set1")+
+#     theme(legend.position = "bottom")+
+#     xlab("Groups of ARGs")+
+#     ylab("Mean of hits")
+# 
+# svg(filename="FIGURES/barplot_megares_by_groups.svg", width=6.5, height=4.5, pointsize=12)
+# megares_barplot_2
+# dev.off()
 
 # Wilcoxon testing summary hits
 settle_not_settle_FMT <- wilcox.test(df.sort.melt$Hits[df.sort.melt$group == "settle" & df.sort.melt$dataset == "FMT"], 
@@ -279,7 +279,7 @@ tetracyclines <- ggplot(df_dp_2.sbs_2[df_dp_2.sbs_2$arg == "Tetracyclines",], ae
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_tetracyclines.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_tetracyclines.svg", width=6, height=1.5, pointsize=12)
 tetracyclines
 dev.off()
 
@@ -296,7 +296,7 @@ mls <- ggplot(df_dp_2.sbs_2[df_dp_2.sbs_2$arg == "MLS",], aes(Time, relab, group
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_mls.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_mls.svg", width=6, height=1.5, pointsize=12)
 mls
 dev.off()
 
@@ -313,7 +313,7 @@ aminoglycosides <- ggplot(df_dp_2.sbs_2[df_dp_2.sbs_2$arg == "Aminoglycosides",]
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_aminoglycosides.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_aminoglycosides.svg", width=6, height=1.5, pointsize=12)
 aminoglycosides
 dev.off()
 
@@ -363,7 +363,7 @@ tetracyclines_sns <- ggplot(df_line3.melt_4.sbs[df_line3.melt_4.sbs$arg == "Tetr
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_tetracyclines_sns.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_tetracyclines_sns.svg", width=6, height=1.5, pointsize=12)
 tetracyclines_sns
 dev.off()
 
@@ -380,7 +380,7 @@ mls_sns <- ggplot(df_line3.melt_4.sbs[df_line3.melt_4.sbs$arg == "MLS",], aes(Ti
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_mls_sns.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_mls_sns.svg", width=6, height=1.5, pointsize=12)
 mls_sns
 dev.off()
 
@@ -397,7 +397,7 @@ aminoglycosides_sns <- ggplot(df_line3.melt_4.sbs[df_line3.melt_4.sbs$arg == "Am
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_aminoglycosides_sns.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_aminoglycosides_sns.svg", width=6, height=1.5, pointsize=12)
 aminoglycosides_sns
 dev.off()
 
@@ -444,7 +444,7 @@ tetracyclines_sg <- ggplot(df_line4.melt_4.sbs[df_line4.melt_4.sbs$arg == "Tetra
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_tetracyclines_sg.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_tetracyclines_sg.svg", width=6, height=1.5, pointsize=12)
 tetracyclines_sg
 dev.off()
 
@@ -461,7 +461,7 @@ mls_sg <- ggplot(df_line4.melt_4.sbs[df_line4.melt_4.sbs$arg == "MLS",], aes(Tim
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_mls_sg.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_mls_sg.svg", width=6, height=1.5, pointsize=12)
 mls_sg
 dev.off()
 
@@ -478,6 +478,6 @@ aminoglycosides_sg <- ggplot(df_line4.melt_4.sbs[df_line4.melt_4.sbs$arg == "Ami
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), 
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
-svg(filename="FIGURES/lineplot_aminoglycosides_sg.svg", width=6, height=1.5, pointsize=12)
+svg(filename="FIGURES/lineplots/lineplot_aminoglycosides_sg.svg", width=6, height=1.5, pointsize=12)
 aminoglycosides_sg
 dev.off()

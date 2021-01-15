@@ -87,6 +87,6 @@ density_plot <- ggplot()+
     ggtitle("Control")
 
 # Save plot
-svg(filename="FIGURES/benchmark_density_plot.svg", width=3.5, height=2.5, pointsize=12)
+svg(filename="FIGURES/density_plot_control.svg", width=3.5, height=2.5, pointsize=12)
 density_plot
 dev.off()

@@ -39,6 +39,6 @@ all_top10_plot <- ggplot(all_top10, aes(reorder(ko, effect_size), effect_size, f
      xlab("KO")
 
 # Save plot
-svg(filename="FIGURES/all_top10_plot.svg", width=8, height=6, pointsize=12)
+svg(filename="FIGURES/songbird_reaults_plot_top10.svg", width=8, height=6, pointsize=12)
 all_top10_plot
 dev.off()
