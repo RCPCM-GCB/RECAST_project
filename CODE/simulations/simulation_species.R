@@ -33,7 +33,7 @@ metrics_calc <- function(df){
 }
 
 # Import data
-df.idxstats.all <- read.csv("DATA/simulation_strains.txt", sep = "\t")
+df.idxstats.all <- read.csv("DATA/simulation_species.txt", sep = "\t")
 
 # Processing data
 df.idxstats.all$coverage[is.na(df.idxstats.all$coverage)] <- 0
@@ -69,6 +69,7 @@ df.f1.from_donor.sbs <- df.f1.from_donor.sbs[df.f1.from_donor.sbs$group != "came
 df.f1.from_donor.sbs <- df.f1.from_donor.sbs[df.f1.from_donor.sbs$group != "came_itself",]
 
 df.f1.from_donor.sbs$group <- factor(df.f1.from_donor.sbs$group, levels = c("came_from_donor", "came_from_before"))
+species <- df.f1.from_donor.sbs
 
 # Make the species classification quality plot
 from_donor.metrics <- ggplot(df.f1.from_donor.sbs, aes(nreads, value, col = complexity))+
