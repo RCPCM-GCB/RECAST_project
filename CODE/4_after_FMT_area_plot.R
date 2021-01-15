@@ -15,6 +15,7 @@
 workdir <- "/home/acari/github/FMT_project/"
 setwd(workdir)
 
+# Set libraries
 library(ggplot2)
 library(tidyr)
 library(stringr)
@@ -22,18 +23,25 @@ library(reshape2)
 library(dplyr)
 library(gridExtra)
 
-# import data tables
-df_sorting <- read.csv("DATA/df_reads_count_sorting.org", sep = "\t", stringsAsFactors = F)
-df_sorting_bench <- read.csv("DATA/df_reads_count_benchmark_sorting.org", sep = "\t", stringsAsFactors = F)
-df_sorting.all <- rbind(df_sorting, df_sorting_bench)
-
-df_non_sorting <- read.csv("DATA/df_reads_count_non_sorting.org", sep = "\t", stringsAsFactors = F)
-df_non_sorting_bench <- read.csv("DATA/df_reads_count_benchmark_non_sorting.org", sep = "\t", stringsAsFactors = F)
-
+# Import tables
+## Metadata table
 sample.metadata <- read.csv("DATA/sample.metadata.txt", sep = "\t", stringsAsFactors = F)
 sample.metadata.sbs <- sample.metadata[c(1:3,7)]
+## Case
+### Sorting
+df_sorting <- read.csv("DATA/df_reads_count_sorting.org", sep = "\t", stringsAsFactors = F)
+### Non-Sorting
+df_non_sorting <- read.csv("DATA/df_reads_count_non_sorting.org", sep = "\t", stringsAsFactors = F)
+## Control
+### Sorting
+df_sorting_bench <- read.csv("DATA/df_reads_count_benchmark_sorting.org", sep = "\t", stringsAsFactors = F)
+### Non-Sorting
+df_non_sorting_bench <- read.csv("DATA/df_reads_count_benchmark_non_sorting.org", sep = "\t", stringsAsFactors = F)
 
-# add groups to sorting data frame 
+# Merge sorting tables
+df_sorting.all <- rbind(df_sorting, df_sorting_bench)
+
+# Add groups to sorting data frame 
 groups <- sapply(str_split(df_sorting$sample, "\\_", n = 3), function(x) x[3])
 pattern <- paste0("_",unique(groups), collapse = "|")
 non_sorting_sample_id <- gsub(pattern, "", df_sorting$sample)
@@ -64,12 +72,12 @@ group.df$group[group.df$group == "s"] <- "settle"
 group.df$group[group.df$group == "n"] <- "not_settle"
 group.df$group <- gsub("came_", "", group.df$group)
 
-####
+# Merge merge merge
 df_sort_gr <- cbind(group.df[-1], df_sorting.all[c(1,2)])
 df_sort_gr2 <- merge(sample.metadata.sbs, df_sort_gr, by = 1)
 df_sort_gr3 <- df_sort_gr2[df_sort_gr2$group %in% c("from_donor", "from_both", "from_before", "itself"),]
 
-###
+# Regroup tables
 df_dp <- df_sort_gr3[-1] %>% 
     group_by(Subject, Dataset, Time, group, bechmark) %>% 
     summarise(n_reads = sum(n_reads))
@@ -83,7 +91,7 @@ df_dp_all <- as.data.frame(df_dp_all)
 df_dp_2 <- merge(df_dp, df_dp_all, by = c("Subject", "Dataset", "Time", "bechmark"))
 df_dp_2$relab <- (df_dp_2$n_reads/df_dp_2$all_reads)*100
 
-# make plot
+# Make plots
 df_dp_2.sbs <- df_dp_2[df_dp_2$Time < 400,]
 df_dp_2.sbs$group <- factor(df_dp_2.sbs$group, levels = c("from_donor", "from_both", "from_before", "itself"))
 df_dp_2.sbs <- df_dp_2.sbs[df_dp_2.sbs$Time != 45 &  df_dp_2.sbs$Time != 75,]
@@ -130,6 +138,7 @@ VOIGT15_plot <- ggplot(df_dp_2.sbs[df_dp_2.sbs$Dataset %in% c("VOIGT15"),], aes(
     theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
           axis.text.x  = element_text(angle=90, vjust=0.5, size=6.5))
 
+# Save plots
 svg(filename="FIGURES/SPB18_LEE17_plot.svg", width=8, height=2, pointsize=12)
 SPB18_LEE17_plot
 dev.off()

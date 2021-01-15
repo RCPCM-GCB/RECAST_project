@@ -1,7 +1,21 @@
-workdir <- "/home/acari/github/RECAST_project/"
+###################################################################################
+# This R code designed to made Figure 5C (part 1) "Distribution of antibiotic     #
+# and nisin resistance genes in “basket” categories over time."                   #
+# of Olekhnovich et al. (2020) manuscript                                         #
+#                                                                                 #
+# "Separation of donor and recipient microbial diversity                          #
+# allow to determine taxonomic and functional features of                         #
+# microbiota restructuring following fecal transplantation"                       #
+#                                                                                 #
+## E I. Olekhnovich, January 14, 2021                                             #
+#                                                                                 #
+###################################################################################
 
+# Set work directory
+workdir <- "/home/acari/github/RECAST_project/"
 setwd(workdir)
 
+# Set libraries
 library(stringr)
 library(zCompositions)
 library(pheatmap)
@@ -13,20 +27,24 @@ library(dplyr)
 
 source("CODE/mini_compositions_lib.R")
 
-# import metadata
+# Import tables
+## Metadata
 sample.metadata <- read.csv("DATA/sample.metadata", sep = "\t")
 
-# import datasets
+## MEGARes data
+### Case
 df.sort <- read.csv("DATA/df.megares.mech.sorting.txt", sep = "\t", stringsAsFactors = F, row.names = NULL)
 df.sort <- spread(df.sort, Mechanism, Hits, fill = 0)
 
+### Control
 df.sort_benchmark <- read.csv("DATA/df.megares.mech.sorting_benchmark.txt", sep = "\t", stringsAsFactors = F, row.names = NULL)
 df.sort_benchmark <- spread(df.sort_benchmark, Mechanism, Hits, fill = 0)
 
+# Merge Merge Merge 
 df.sort.all <- merge(df.sort, df.sort_benchmark, all = TRUE)
 df.sort.all[is.na(df.sort.all)] <- 0
 
-# make groups table
+# Make groups table
 groups <- sapply(str_split(df.sort$Sample, "\\_", n = 3), function(x) x[3])
 pattern <- paste0("_",unique(groups), collapse = "|")
 non_sorting_sample_id <- gsub(pattern, "", df.sort$Sample)
@@ -65,7 +83,7 @@ rownames(df.sort.all) <- df.sort.all$Sample
 df.sort.all <- df.sort.all[-1]
 df.sort.all <- df.sort.all[as.character(group.df$Sample),]
 
-# filtering taxonomic data.frame
+# Filtering taxonomic data.frame
 num.zeros <- colSums(df.sort.all == 0)
 save.zeros  <-  (num.zeros<round(nrow(df.sort.all)*0.8))
 df.sort.no_zeros  <-  df.sort.all[,(save.zeros==TRUE)]

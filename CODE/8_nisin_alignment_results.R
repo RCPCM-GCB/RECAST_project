@@ -1,7 +1,21 @@
-workdir <- "/home/acari/github/RECAST_project/"
+###################################################################################
+# This R code designed to made Figure 5C (part 2) "Distribution of antibiotic     #
+# and nisin resistance genes in “basket” categories over time."                   #
+# of Olekhnovich et al. (2020) manuscript                                         #
+#                                                                                 #
+# "Separation of donor and recipient microbial diversity                          #
+# allow to determine taxonomic and functional features of                         #
+# microbiota restructuring following fecal transplantation"                       #
+#                                                                                 #
+## E I. Olekhnovich, January 14, 2021                                             #
+#                                                                                 #
+###################################################################################
 
+# Set work directory
+workdir <- "/home/acari/github/RECAST_project/"
 setwd(workdir)
 
+# Set libraries
 library(stringr)
 library(zCompositions)
 library(pheatmap)
