@@ -12,7 +12,7 @@
 ###################################################################################
 
 # Set work directory 
-workdir <- "/home/acari/github/RECAST_project/" # please change to your work dorectory 
+workdir <- "/home/acari/github/RECAST_project/" # please change to your work dorectory
 setwd(workdir)
 
 # Set libraries

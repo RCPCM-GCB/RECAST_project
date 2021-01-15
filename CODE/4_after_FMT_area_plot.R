@@ -1,3 +1,17 @@
+###################################################################################
+# This R code designed to made Figure 4 "Area plots show taxonomic                #
+# composition of # recipients’ post-FMT metagenomic samples over time"            #
+# of Olekhnovich et al. (2020) manuscript                                         #
+#                                                                                 #
+# "Separation of donor and recipient microbial diversity                          #
+# allow to determine taxonomic and functional features of                         #
+# microbiota restructuring following fecal transplantation"                       #
+#                                                                                 #
+## E I. Olekhnovich, January 14, 2021                                             #
+#                                                                                 #
+###################################################################################
+
+# Set work directory 
 workdir <- "/home/acari/github/FMT_project/"
 setwd(workdir)
 
@@ -127,5 +141,3 @@ dev.off()
 svg(filename="FIGURES/VOIGT15_plot.svg", width=8, height=2, pointsize=12)
 VOIGT15_plot
 dev.off()
-
-
