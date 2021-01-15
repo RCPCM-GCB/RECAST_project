@@ -83,6 +83,6 @@ from_donor.metrics <- ggplot(df.f1.from_donor.sbs, aes(nreads, value, col = comp
     scale_color_brewer(palette = "Set1")
 
 # Save plot
-svg(filename="f1_metrics_strains.svg", width=4.0, height=5.0)
+svg(filename="FIGURES/f1_score_strains.svg", width=4.0, height=5.0)
 from_donor.metrics
 dev.off()
